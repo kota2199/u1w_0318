@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class LoopingEnemy : MonoBehaviour
+public class LoopMoveObjectController : MonoBehaviour
 {
     private Vector2 startPos, endPos;
 
