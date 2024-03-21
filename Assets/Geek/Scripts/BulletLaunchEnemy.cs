@@ -23,40 +23,40 @@ public class BulletLaunchEnemy : MonoBehaviour
     [SerializeField]
     private float radiusOfAttack = 5.0f;
 
-    private Vector2 posGap;
-
-    private bool isAttacking = false;
+    private bool startLaunch = false;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-
-        StartCoroutine(Launch());
     }
 
     void Update()
     {
-        posGap = transform.position - player.transform.position;
-        if(posGap.x < radiusOfAttack && posGap.y < radiusOfAttack)
+        Vector2 posGap = transform.position - player.transform.position;
+        float posGapX = Mathf.Abs(posGap.x);
+        float posGapY = Mathf.Abs(posGap.y);
+
+        if(posGapX < radiusOfAttack && posGapY < radiusOfAttack)
         {
-            isAttacking = true;
+            if (!startLaunch)
+            {
+                startLaunch = true;
+                StartCoroutine(Launch());
+            }
         }
         else
         {
-            isAttacking = false;
+            startLaunch = false;
+            StopCoroutine(Launch());
         }
-
-        Debug.Log(isAttacking);
     }
 
     private IEnumerator Launch()
     {
-        while (isAttacking)
+        while (startLaunch)
         {
             SetBullet();
-
-            yield return new WaitForSeconds(interval);
 
             Vector3 launchPos = transform.position;
 
@@ -64,9 +64,11 @@ public class BulletLaunchEnemy : MonoBehaviour
 
             EnemyBulletController bulletController = b.GetComponent<EnemyBulletController>();
 
-            bulletController.launchVector =  player.transform.position - transform.position;
+            bulletController.launchVector = player.transform.position - transform.position;
 
-            bulletController.speed = bulletSpeed;    
+            bulletController.speed = bulletSpeed;
+
+            yield return new WaitForSeconds(interval);
         }
     }
     public void SetBullet()
