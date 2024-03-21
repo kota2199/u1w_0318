@@ -39,13 +39,16 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerRigidbody2D = GetComponent<Rigidbody2D>();
-
-        maxSpeed = playerStatus.maxSpeed;
     }
 
     // Update is called once per frame
     private void Update()
     {
+        // Playerのスピードを指定
+        maxSpeed = playerStatus.maxSpeed;
+        // Playerの慣性を指定
+        playerRigidbody2D.drag = playerStatus.linearDrag;
+
         // PlayerがGroundに接地しているかを判定
         // もしPlayerのy軸方向への加速度が0なら地面に接地していると判定する
         if (playerRigidbody2D.velocity.y == 0)
@@ -100,6 +103,7 @@ public class PlayerController : MonoBehaviour
         // 移動の横方向をInputから値で取得
         float horizontalInput = Input.GetAxis(operation);
         // 速度をセットする
-        playerRigidbody2D.velocity = new Vector2(horizontalInput * maxSpeed, playerRigidbody2D.velocity.y);
+        //playerRigidbody2D.velocity = new Vector2(horizontalInput * maxSpeed, playerRigidbody2D.velocity.y);
+        playerRigidbody2D.AddForce(new Vector2(horizontalInput * maxSpeed, 0), ForceMode2D.Force);
     }
 }
