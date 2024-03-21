@@ -18,10 +18,12 @@ public class PlayerController : MonoBehaviour
 {
     // PlayerのRigidbody
     private Rigidbody2D playerRigidbody2D;
+    [SerializeField]
+    PlayerStatus playerStatus;
 
     // 以下変数
     // 移動速度の速さを指定
-    public float maxSpeed = 9f;
+    private float maxSpeed;
     // ジャンプする力の大きさを指定
     public float jumpPower = 10f;
     // Groundに設置しているかの判定処理
@@ -37,6 +39,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerRigidbody2D = GetComponent<Rigidbody2D>();
+
+        maxSpeed = playerStatus.maxSpeed;
     }
 
     // Update is called once per frame

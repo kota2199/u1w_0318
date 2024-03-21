@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46c092c6d81b4598a76d57d9fe4d7f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 9
+  playerStatus: {fileID: 11400000, guid: c9621b51ebed244e38241abf1677812a, type: 2}
   jumpPower: 10
 --- !u!1 &313724633
 GameObject:
