@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     PlayerStatus playerStatus;
     [SerializeField]
     CameraController cameraController;
+    [SerializeField]
+    InputGuidController inputGuidController; 
 
     // 以下変数
     // 移動速度の速さを指定
@@ -104,6 +106,7 @@ public class PlayerController : MonoBehaviour
             checkPointCount++;
             // 「Operation_Method」のcheckPointCount番目の操作方法に変更
             operationMethod = (Operation_Method)checkPointCount;
+            StartCoroutine(inputGuidController.Anim(operationMethod.ToString()));
             Debug.Log("現在の操作方法：" + operationMethod);
         }
     }
