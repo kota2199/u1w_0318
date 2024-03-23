@@ -10,10 +10,24 @@ public class PlayerHP : MonoBehaviour
     [SerializeField]
     private Text hpText;
 
+    [SerializeField]
+    private GameStatusManager statusManager;
+
+    [SerializeField]
+    private GameObject[] hpIcons;
+
     // Start is called before the first frame update
     void Start()
     {
-        OverwriteToText();
+        OverwriteToUI();
+    }
+
+    private void Update()
+    {
+        if(transform.position.y < -10f)
+        {
+            Damage(hp);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,11 +41,28 @@ public class PlayerHP : MonoBehaviour
     public void Damage(int damageAmount)
     {
         hp -= damageAmount;
-        OverwriteToText();
+        OverwriteToUI();
+
+        if(hp <= 0)
+        {
+            statusManager.GameOver();
+        }
     }
 
-    private void OverwriteToText()
+    private void OverwriteToUI()
     {
+        for(int i = 0; i < hpIcons.Length; i++)
+        {
+            if(hp >= i + 1)
+            {
+                hpIcons[i].SetActive(true);
+            }
+            else
+            {
+                hpIcons[i].SetActive(false);
+            }
+        }
+
         hpText.text = "HP : " + hp.ToString();
     }
 }
