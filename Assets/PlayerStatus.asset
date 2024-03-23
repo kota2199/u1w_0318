@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlayerStatus
   m_EditorClassIdentifier: Assembly-CSharp::NewBehaviourScript
   gravitationalAcceleration: -9.81
-  linearDrag: 5
-  maxSpeed: 4
+  friction: 0.8
+  maxSpeed: 2
