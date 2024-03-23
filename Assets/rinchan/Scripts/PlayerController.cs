@@ -129,19 +129,13 @@ public class PlayerController : MonoBehaviour
         // アニメーションの再生
         playerAnimator.SetFloat("Horizontal", horizontalInput);
 
-        if (horizontalInput == 0)
-        {
-            playerAnimator.SetBool("isRunning", false);
-        }
-        else if(horizontalInput != 0)
+        if(horizontalInput != 0)
         {
             // キャラがどっちに向いているかを判定する
             float direction = Mathf.Sign(horizontalInput);
             // キャラの向きをキーの押された方向に指定する
             transform.localScale =
                 new Vector3(defaultLocalScale.x * direction, defaultLocalScale.y, defaultLocalScale.z);
-
-            playerAnimator.SetBool("isRunning", true);
         }
 
         if (!playerStatus.isIertia)
