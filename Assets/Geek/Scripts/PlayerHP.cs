@@ -16,6 +16,9 @@ public class PlayerHP : MonoBehaviour
     [SerializeField]
     private GameObject[] hpIcons;
 
+    [SerializeField]
+    private UIAnimation uiAnim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +44,8 @@ public class PlayerHP : MonoBehaviour
     public void Damage(int damageAmount)
     {
         hp -= damageAmount;
+
+        uiAnim.ScaleAnime(0.7f, 1f, 1f);
         OverwriteToUI();
 
         if(hp <= 0)
