@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStatus: {fileID: 11400000, guid: c9621b51ebed244e38241abf1677812a, type: 2}
   cameraController: {fileID: 0}
+  inputGuidController: {fileID: 0}
   jumpPower: 12
 --- !u!114 &6623365938945197893
 MonoBehaviour:
@@ -183,3 +184,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  uiAnim: {fileID: 0}

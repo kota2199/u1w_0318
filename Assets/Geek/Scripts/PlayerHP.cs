@@ -45,7 +45,7 @@ public class PlayerHP : MonoBehaviour
     {
         hp -= damageAmount;
 
-        uiAnim.ScaleAnime(0.7f, 1f, 1f);
+        uiAnim.ScaleAnime(0.7f, 1f, 0.3f);
         OverwriteToUI();
 
         if(hp <= 0)
