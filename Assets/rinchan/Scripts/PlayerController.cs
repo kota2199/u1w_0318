@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         // Playerの慣性を指定
         //material.friction = playerStatus.friction;
+
         // カメラにPlayerの座標を渡す
         cameraController.SetPosition(this.transform.position);
 
@@ -84,7 +85,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Attack!");
         }
 
-        Debug.Log(GetComponent<Rigidbody2D>().velocity);
+        //Debug.Log(GetComponent<Rigidbody2D>().velocity);
     }
 
     private void FixedUpdate()
