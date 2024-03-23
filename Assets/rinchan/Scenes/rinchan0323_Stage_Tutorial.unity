@@ -9840,6 +9840,7 @@ MonoBehaviour:
   - {fileID: 666771447}
   - {fileID: 1395626533}
   - {fileID: 55200628}
+  uiAnim: {fileID: 0}
 --- !u!1 &1031462864
 GameObject:
   m_ObjectHideFlags: 0
@@ -10046,6 +10047,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d71bffb3a66f9c64ab943ec5299ca9d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxScale: 1.2
+  minScale: 1
+  rightKeyImage: {fileID: 0}
+  lefKeyImage: {fileID: 0}
 --- !u!1 &1164635312
 GameObject:
   m_ObjectHideFlags: 0
@@ -10252,31 +10257,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1309778463 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7695392150775768657, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
+--- !u!50 &1309778477 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 7695392150775768660, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
   m_PrefabInstance: {fileID: 1410918867}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1309778471
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309778463}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 89fd4d1d3ccbf4852bf5debbf69107d4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1326310204
 GameObject:
   m_ObjectHideFlags: 0
@@ -10630,6 +10615,10 @@ PrefabInstance:
       propertyPath: cameraController
       value: 
       objectReference: {fileID: 273436436}
+    - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
+      propertyPath: playerRigidbody2D
+      value: 
+      objectReference: {fileID: 1309778477}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
 --- !u!1 &1438798134
@@ -12276,8 +12265,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46c092c6d81b4598a76d57d9fe4d7f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRigidbody2D: {fileID: 0}
+  playerAnimator: {fileID: 0}
   playerStatus: {fileID: 11400000, guid: c9621b51ebed244e38241abf1677812a, type: 2}
   cameraController: {fileID: 273436436}
+  inputGuidController: {fileID: 0}
   jumpPower: 30
 --- !u!61 &8058148558343707738
 BoxCollider2D:
