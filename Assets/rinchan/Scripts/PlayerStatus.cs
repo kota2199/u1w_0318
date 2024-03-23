@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerStatus : ScriptableObject
 {
     public float gravitationalAcceleration;    // 重力加速度の速さを指定
-    public int linearDrag;                     // 慣性の大きさを指定
+    public bool isIertia;                     // 慣性かどうか
     public float maxSpeed;                     // 移動速度の速さを指定
     
 }

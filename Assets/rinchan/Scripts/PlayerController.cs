@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D playerRigidbody2D;
     [SerializeField]
     PlayerStatus playerStatus;
+    [SerializeField]
+    CameraController cameraController;
 
     // 以下変数
     // 移動速度の速さを指定
@@ -39,15 +41,18 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerRigidbody2D = GetComponent<Rigidbody2D>();
+
+        // カメラの初期位置
+        cameraController.SetPosition(transform.position);
     }
 
     // Update is called once per frame
     private void Update()
     {
-        // Playerのスピードを指定
-        maxSpeed = playerStatus.maxSpeed;
         // Playerの慣性を指定
-        playerRigidbody2D.drag = playerStatus.linearDrag;
+        //material.friction = playerStatus.friction;
+        // カメラにPlayerの座標を渡す
+        cameraController.SetPosition(this.transform.position);
 
         // PlayerがGroundに接地しているかを判定
         // もしPlayerのy軸方向への加速度が0なら地面に接地していると判定する
@@ -61,11 +66,6 @@ public class PlayerController : MonoBehaviour
             // 地面に接地していないと判定
             isGround = false;
         }
-
-        // プレイヤーの操作
-        //列挙子を文字列に変換
-        operationMethodName = operationMethod.ToString();
-        OperatePlayer(operationMethodName);
 
         // ジャンプの実行
         if (Input.GetButtonDown("Jump"))
@@ -83,6 +83,16 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Attack!");
         }
+
+        Debug.Log(GetComponent<Rigidbody2D>().velocity);
+    }
+
+    private void FixedUpdate()
+    {
+        // プレイヤーの操作
+        //列挙子を文字列に変換
+        operationMethodName = operationMethod.ToString();
+        OperatePlayer(operationMethodName);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -102,8 +112,19 @@ public class PlayerController : MonoBehaviour
     {
         // 移動の横方向をInputから値で取得
         float horizontalInput = Input.GetAxis(operation);
-        // 速度をセットする
-        //playerRigidbody2D.velocity = new Vector2(horizontalInput * maxSpeed, playerRigidbody2D.velocity.y);
-        playerRigidbody2D.AddForce(new Vector2(horizontalInput * maxSpeed, 0), ForceMode2D.Force);
+
+        if (!playerStatus.isIertia)
+        {
+            // 速度をセットする
+            playerRigidbody2D.velocity = new Vector2(horizontalInput * playerStatus.maxSpeed, playerRigidbody2D.velocity.y);
+        }
+        else if (playerStatus.isIertia)
+        {
+            // 速度が上がり続けるのを防ぐ
+            if (playerRigidbody2D.velocity.magnitude < 10)
+            {
+                playerRigidbody2D.AddForce(new Vector2(horizontalInput * playerStatus.maxSpeed, 0), ForceMode2D.Force);
+            }
+        }
     }
 }
