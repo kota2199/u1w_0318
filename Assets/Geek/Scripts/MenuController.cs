@@ -27,6 +27,9 @@ public class MenuController : MonoBehaviour
 
     private int maxMenuNumber;
 
+    [SerializeField]
+    private FadeController fadeController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -98,6 +101,8 @@ public class MenuController : MonoBehaviour
                 1.0f,   //ジャンプの高さ
                 1,      //ジャンプ総数
                 1.0f);  //演出時間
+
+                fadeController.FadeOut();
 
                 yield return new WaitForSeconds(1);
 

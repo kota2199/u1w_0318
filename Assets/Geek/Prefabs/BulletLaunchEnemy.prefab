@@ -104,3 +104,4 @@ MonoBehaviour:
   bulletSpeed: 3
   interval: 3
   bulletType: 0
+  radiusOfAttack: 5

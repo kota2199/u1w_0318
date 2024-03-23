@@ -19,7 +19,7 @@ public class UIAnimation : MonoBehaviour
 
     public void ScaleAnime(float maxScale, float minScale, float delayTime)
     {
-        this.transform.DOScale(maxScale, 1f).SetEase(Ease.InOutBack);
-        this.transform.DOScale(minScale, 1f).SetEase(Ease.InOutBack).SetDelay(delayTime);
+        this.transform.DOScale(maxScale, 0.3f).SetEase(Ease.InOutBack);
+        this.transform.DOScale(minScale, 0.2f).SetEase(Ease.InOutBack).SetDelay(delayTime);
     }
 }
