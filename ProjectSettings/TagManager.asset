@@ -4,9 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-
+  - Enemy
+  - EnemyBullet
   - CheckPoint
-
+  - Gravity
+  - Ineritia
+  - SpeedDown
   layers:
   - Default
   - TransparentFX
