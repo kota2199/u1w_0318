@@ -33,13 +33,14 @@ public class PlayerController : MonoBehaviour
     // Groundに設置しているかの判定処理
     private bool isGround;
     // EnumのOperation_Methodを定義
-    Operation_Method operationMethod = Operation_Method.Horizontal;
+    [SerializeField]
+    private Operation_Method operationMethod = Operation_Method.Horizontal;
     //  現在の操作方法の名前
     private string operationMethodName;
     // チェックポイントカウント
     private int checkPointCount = 0;
     // PlayerSpriteの初期サイズを保存する変数
-    Vector3 defaultLocalScale;
+    private Vector3 defaultLocalScale;
 
     // Start is called before the first frame update
     private void Start()
@@ -60,8 +61,8 @@ public class PlayerController : MonoBehaviour
         cameraController.SetPosition(this.transform.position);
 
         // PlayerがGroundに接地しているかを判定
-        // もしPlayerのy軸方向への加速度が0なら地面に接地していると判定する
-        if (playerRigidbody2D.velocity.y == 0)
+        // もしPlayerのy軸方向への加速度が0なら地面に接地していると判定する *たまにジャンプできないときがあったため範囲を指定
+        if (playerRigidbody2D.velocity.y > -0.1 && playerRigidbody2D.velocity.y < 0.1)
         {
             // 地面に接地していると判定
             isGround = true;

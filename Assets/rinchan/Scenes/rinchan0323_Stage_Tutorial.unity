@@ -705,59 +705,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 800, y: 450}
   m_Pivot: {x: 0, y: 1}
---- !u!1 &380166117 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2462999850449137452, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
-  m_PrefabInstance: {fileID: 1652309100}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &380166118 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2462999850449137453, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
-  m_PrefabInstance: {fileID: 1652309100}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 380166117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8344c8177058c7a44b57e94853210a7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!95 &380166121
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 380166117}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2cc268220dbe44c609089d6507f34d6d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &380166122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 380166117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d0d501785e7f45058095db3987e84ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blueBird: {fileID: 7400000, guid: 9a4ca4c85845944fe95cee798188785a, type: 2}
-  greenBird: {fileID: 7400000, guid: 571888ebee1544249b6749e469b55126, type: 2}
-  redBird: {fileID: 7400000, guid: 5a9eda4520e2145bd95b39d2f6569fc7, type: 2}
-  yellowBird: {fileID: 7400000, guid: 01eb797442d8d4e3c9e9e36733980eb1, type: 2}
-  bulletLaunchEnemy: {fileID: 380166118}
 --- !u!1 &399807293
 GameObject:
   m_ObjectHideFlags: 0
@@ -10231,6 +10178,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!4 &1269684491 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7695392150775768659, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
+  m_PrefabInstance: {fileID: 1410918867}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1326310204
 GameObject:
   m_ObjectHideFlags: 0
@@ -11124,14 +11076,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2462999850449137450, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
-      propertyPath: m_FlipX
-      value: 1
+    - target: {fileID: 380166122, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
+      propertyPath: stageType
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2462999850449137450, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
-      propertyPath: m_Sprite
+    - target: {fileID: 380166122, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
+      propertyPath: playerTransform
       value: 
-      objectReference: {fileID: 21300000, guid: e2f15112ead484f27bd0c401bebbfa5e, type: 3}
+      objectReference: {fileID: 1269684491}
+    - target: {fileID: 380166122, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
+      propertyPath: animatorController
+      value: 
+      objectReference: {fileID: 9100000, guid: 2cc268220dbe44c609089d6507f34d6d, type: 2}
     - target: {fileID: 2462999850449137451, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -11182,11 +11138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462999850449137453, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
       propertyPath: bulletType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2462999850449137453, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
-      propertyPath: radiusOfAttack
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
@@ -12296,6 +12248,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStatus: {fileID: 11400000, guid: c9621b51ebed244e38241abf1677812a, type: 2}
   interval: 10
+  changedGravity: -5
+  changedPlayerSpeed: 2.5
 --- !u!114 &8058148558343707737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12314,6 +12268,7 @@ MonoBehaviour:
   cameraController: {fileID: 273436436}
   inputGuidController: {fileID: 0}
   jumpPower: 30
+  operationMethod: 0
 --- !u!61 &8058148558343707738
 BoxCollider2D:
   m_ObjectHideFlags: 0
