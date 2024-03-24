@@ -126,9 +126,10 @@ MonoBehaviour:
   playerRigidbody2D: {fileID: 7695392150775768660}
   playerAnimator: {fileID: 1309778471}
   playerStatus: {fileID: 11400000, guid: c9621b51ebed244e38241abf1677812a, type: 2}
-  cameraController: {fileID: 6573278109806323867, guid: bbc35f2aed8a64e8e8a4bcb5f228058d, type: 3}
+  cameraController: {fileID: 0}
   inputGuidController: {fileID: 0}
   jumpPower: 12
+  operationMethod: 0
 --- !u!114 &7695392150775768663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStatus: {fileID: 11400000, guid: c9621b51ebed244e38241abf1677812a, type: 2}
   interval: 10
+  changedGravity: -5
+  changedPlayerSpeed: 2.5
 --- !u!114 &369239132489166695
 MonoBehaviour:
   m_ObjectHideFlags: 0
