@@ -27,6 +27,11 @@ public class MenuController : MonoBehaviour
 
     private int maxMenuNumber;
 
+    [SerializeField]
+    private FadeController fadeController;
+
+    public float playerVector = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +48,7 @@ public class MenuController : MonoBehaviour
                 canSelectStage = false;
                 target++;
                 StartCoroutine(PlayerMoveToTarget());
+                playerVector = 1f;
             }
 
             if (Input.GetKeyDown(KeyCode.A) && target > 0)
@@ -50,6 +56,7 @@ public class MenuController : MonoBehaviour
                 canSelectStage = false;
                 target--;
                 StartCoroutine(PlayerMoveToTarget());
+                playerVector = -1f;
             }
         }
 
@@ -57,6 +64,8 @@ public class MenuController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(PlayerJump());
+
+            player.GetComponent<MenuPlayerController>().Jump();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -70,6 +79,8 @@ public class MenuController : MonoBehaviour
         player.transform.DOMove(PlayerTargetPosition(), playerMoveSpeed);
 
         yield return new WaitForSeconds(playerMoveSpeed);
+
+        playerVector = 0;
         canSelectStage = true;
     }
 
@@ -77,7 +88,7 @@ public class MenuController : MonoBehaviour
     {
         if (!onMenu)
         {
-            //Tutorialの位置に2秒で1回ジャンプして移動する
+            //Tutorial?????u??2?b??1???W?????v????????????
             player.transform.DOJump(PlayerTargetPosition(), jumpPower: 3f, numJumps: 1, duration: 2f);
 
             yield return new WaitForSeconds(2);
@@ -94,10 +105,12 @@ public class MenuController : MonoBehaviour
 
                 Vector3 playerPos = player.transform.position;
                 player.transform.DOJump(
-                playerPos,//終了時の位置
-                1.0f,   //ジャンプの高さ
-                1,      //ジャンプ総数
-                1.0f);  //演出時間
+                playerPos,//?I?????????u
+                1.0f,   //?W?????v??????
+                1,      //?W?????v????
+                1.0f);  //???o????
+
+                fadeController.FadeOut();
 
                 yield return new WaitForSeconds(1);
 

@@ -13,7 +13,10 @@ public class InputGuidController : MonoBehaviour
     private float minScale = 1f;
 
     [SerializeField]
-    private Image rightKeyImage, lefKeyImage;
+    private Image rightKeyImage, leftKeyImage;
+
+    [SerializeField]
+    private Sprite j, l, g, i, m, r, v, q, w, p;
 
     private string r_Key, l_Key;
 
@@ -45,12 +48,87 @@ public class InputGuidController : MonoBehaviour
             }
         }
 
-        Debug.Log("R is " + r_Key + ". L is "+l_Key);
-
         this.transform.DOScale(maxScale, 1f).SetEase(Ease.InOutBack);
         yield return new WaitForSeconds(1f);
 
+        KeyConfig();
 
         this.transform.DOScale(minScale, 1f).SetEase(Ease.InOutBack).SetDelay(2f);
+    }
+
+    private void KeyConfig()
+    {
+        Debug.Log(r_Key);
+        switch (r_Key)
+        {
+            case "J":
+                rightKeyImage.sprite = j;
+                break;
+            case "L":
+                rightKeyImage.sprite = l;
+                break;
+            case "G":
+                rightKeyImage.sprite = g;
+                break;
+            case "I":
+                rightKeyImage.sprite = i;
+                break;
+            case "M":
+                rightKeyImage.sprite = m;
+                break;
+            case "R":
+                rightKeyImage.sprite = r;
+                break;
+            case "V":
+                rightKeyImage.sprite = v;
+                break;
+            case "Q":
+                rightKeyImage.sprite = q;
+                break;
+            case "W":
+                rightKeyImage.sprite = w;
+                break;
+            case "P":
+                rightKeyImage.sprite = p;
+                break;
+            default:
+                break;
+        }
+
+        switch (l_Key)
+        {
+            case "J":
+                leftKeyImage.sprite = j;
+                break;
+            case "L":
+                leftKeyImage.sprite = l;
+                break;
+            case "G":
+                leftKeyImage.sprite = g;
+                break;
+            case "I":
+                leftKeyImage.sprite = i;
+                break;
+            case "M":
+                leftKeyImage.sprite = m;
+                break;
+            case "R":
+                leftKeyImage.sprite = r;
+                break;
+            case "V":
+                leftKeyImage.sprite = v;
+                break;
+            case "Q":
+                leftKeyImage.sprite = q;
+                break;
+            case "W":
+                leftKeyImage.sprite = w;
+                break;
+            case "P":
+                leftKeyImage.sprite = p;
+                break;
+            default:
+                break;
+        }
     }
 }
