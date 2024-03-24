@@ -17,35 +17,38 @@ public enum Operation_Method
 public class PlayerController : MonoBehaviour
 {
     // PlayerのRigidbody
-    private Rigidbody2D playerRigidbody2D;
+    public Rigidbody2D playerRigidbody2D;
+    // PlayerのAnimator
+    public Animator playerAnimator;
     [SerializeField]
     PlayerStatus playerStatus;
     [SerializeField]
     CameraController cameraController;
     [SerializeField]
-    InputGuidController inputGuidController; 
+    InputGuidController inputGuidController;
 
     // 以下変数
-    // 移動速度の速さを指定
-    private float maxSpeed;
     // ジャンプする力の大きさを指定
     public float jumpPower = 10f;
     // Groundに設置しているかの判定処理
     private bool isGround;
     // EnumのOperation_Methodを定義
-    Operation_Method operationMethod = Operation_Method.Horizontal;
+    [SerializeField]
+    private Operation_Method operationMethod = Operation_Method.Horizontal;
     //  現在の操作方法の名前
     private string operationMethodName;
     // チェックポイントカウント
     private int checkPointCount = 0;
+    // PlayerSpriteの初期サイズを保存する変数
+    private Vector3 defaultLocalScale;
 
     // Start is called before the first frame update
     private void Start()
     {
-        playerRigidbody2D = GetComponent<Rigidbody2D>();
-
         // カメラの初期位置
         cameraController.SetPosition(transform.position);
+        // 初期状態でPlayerの大きさを保存
+        defaultLocalScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -58,8 +61,8 @@ public class PlayerController : MonoBehaviour
         cameraController.SetPosition(this.transform.position);
 
         // PlayerがGroundに接地しているかを判定
-        // もしPlayerのy軸方向への加速度が0なら地面に接地していると判定する
-        if (playerRigidbody2D.velocity.y == 0)
+        // もしPlayerのy軸方向への加速度が0なら地面に接地していると判定する *たまにジャンプできないときがあったため範囲を指定
+        if (playerRigidbody2D.velocity.y > -0.1 && playerRigidbody2D.velocity.y < 0.1)
         {
             // 地面に接地していると判定
             isGround = true;
@@ -70,6 +73,10 @@ public class PlayerController : MonoBehaviour
             isGround = false;
         }
 
+        // アニメーションの再生
+        playerAnimator.SetFloat("Vertical", playerRigidbody2D.velocity.y);
+        playerAnimator.SetBool("isGround", isGround);
+
         // ジャンプの実行
         if (Input.GetButtonDown("Jump"))
         {
@@ -78,8 +85,11 @@ public class PlayerController : MonoBehaviour
             {
                 // ジャンプの処理
                 playerRigidbody2D.AddForce(Vector2.up * jumpPower * 30);
+                // ジャンプアニメーションの再生
+                playerAnimator.SetTrigger("Jump");
             }
         }
+        
 
         // 攻撃の実行
         if (Input.GetButtonDown("Attack"))
@@ -116,6 +126,18 @@ public class PlayerController : MonoBehaviour
     {
         // 移動の横方向をInputから値で取得
         float horizontalInput = Input.GetAxis(operation);
+
+        // アニメーションの再生
+        playerAnimator.SetFloat("Horizontal", horizontalInput);
+
+        if(horizontalInput != 0)
+        {
+            // キャラがどっちに向いているかを判定する
+            float direction = Mathf.Sign(horizontalInput);
+            // キャラの向きをキーの押された方向に指定する
+            transform.localScale =
+                new Vector3(defaultLocalScale.x * direction, defaultLocalScale.y, defaultLocalScale.z);
+        }
 
         if (!playerStatus.isIertia)
         {
