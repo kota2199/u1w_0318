@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TutorialController : MonoBehaviour
 {
-    private int tutorialCount = 0;
+    private int tutorialCount = -1;
 
     [SerializeField]
     private GameObject[] tutorialObjs;
@@ -18,7 +18,7 @@ public class TutorialController : MonoBehaviour
             if(i == tutorialCount)
             {
                 tutorialObjs[i].SetActive(true);
-                autoDelete(tutorialObjs[i]);
+                StartCoroutine(autoDelete(tutorialObjs[i]));
             }
             else
             {
@@ -29,6 +29,7 @@ public class TutorialController : MonoBehaviour
 
     private IEnumerator autoDelete(GameObject obj)
     {
+        Debug.Log("false");
         yield return new WaitForSeconds(5);
         obj.SetActive(false);
     }
