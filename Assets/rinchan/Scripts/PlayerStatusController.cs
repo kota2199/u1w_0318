@@ -13,6 +13,9 @@ public class PlayerStatusController : MonoBehaviour
     private float defaultGravitationalAcceleration = -9.81f;
     private float defaultMaxSpeed = 5f;
 
+    [SerializeField]
+    float changedGravity = -5f, changedPlayerSpeed = 2.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +35,7 @@ public class PlayerStatusController : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Gravity":
-                ChangeGravity(-5f);
+                ChangeGravity(changedGravity);
                 Invoke("InitGravity", interval);
                 break;
             case "Ineritia":
@@ -41,7 +44,7 @@ public class PlayerStatusController : MonoBehaviour
                 break;
             case "SpeedDown":
                 // 引数の値によってスピードが変わるようにする
-                ChangeSpeed(defaultMaxSpeed / 2f);
+                ChangeSpeed(changedPlayerSpeed);
                 Invoke("InitSpeed", interval);
                 break;
             default:
@@ -53,7 +56,7 @@ public class PlayerStatusController : MonoBehaviour
     // 重力変更
     public void ChangeGravity(float gravity)
     {
-        playerStatus.gravitationalAcceleration -= gravity;
+        playerStatus.gravitationalAcceleration = gravity;
     }
     // 重力を元に戻す
     public void InitGravity()
