@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2462999850449137451}
   - component: {fileID: 2462999850449137450}
   - component: {fileID: 2462999850449137453}
+  - component: {fileID: 380166121}
+  - component: {fileID: 380166122}
   m_Layer: 0
   m_Name: BulletLaunchEnemy
   m_TagString: Enemy
@@ -74,9 +76,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e2f15112ead484f27bd0c401bebbfa5e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -103,4 +105,42 @@ MonoBehaviour:
   SpeedDownBullet: {fileID: 433066598127101867, guid: 98d37b724a5316e4da12ea8f0b4e8c4e, type: 3}
   bulletSpeed: 3
   interval: 3
-  bulletType: 0
+  bulletType: 3
+  radiusOfAttack: 5
+--- !u!95 &380166121
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2462999850449137452}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2cc268220dbe44c609089d6507f34d6d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &380166122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2462999850449137452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0d501785e7f45058095db3987e84ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blueBird: {fileID: 7400000, guid: 9a4ca4c85845944fe95cee798188785a, type: 2}
+  greenBird: {fileID: 7400000, guid: 571888ebee1544249b6749e469b55126, type: 2}
+  redBird: {fileID: 7400000, guid: 5a9eda4520e2145bd95b39d2f6569fc7, type: 2}
+  yellowBird: {fileID: 7400000, guid: 01eb797442d8d4e3c9e9e36733980eb1, type: 2}
+  bulletLaunchEnemy: {fileID: 2462999850449137453}
