@@ -9540,6 +9540,8 @@ MonoBehaviour:
   goalCanvas: {fileID: 1787614352}
   gameOverCanvas: {fileID: 425779695}
   nextStageNumber: 1
+  t_CountDown: {fileID: 0}
+  fadeController: {fileID: 0}
 --- !u!1 &802984167
 GameObject:
   m_ObjectHideFlags: 0
@@ -9971,7 +9973,17 @@ MonoBehaviour:
   maxScale: 1.2
   minScale: 1
   rightKeyImage: {fileID: 0}
-  lefKeyImage: {fileID: 0}
+  leftKeyImage: {fileID: 0}
+  j: {fileID: 0}
+  l: {fileID: 0}
+  g: {fileID: 0}
+  i: {fileID: 0}
+  m: {fileID: 0}
+  r: {fileID: 0}
+  v: {fileID: 0}
+  q: {fileID: 0}
+  w: {fileID: 0}
+  p: {fileID: 0}
 --- !u!1 &1164635312
 GameObject:
   m_ObjectHideFlags: 0
@@ -11138,7 +11150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462999850449137453, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
       propertyPath: bulletType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}

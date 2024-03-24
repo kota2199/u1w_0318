@@ -30,6 +30,8 @@ public class BulletLaunchEnemyAnimation : MonoBehaviour
     // BulletLaunchEnemySpriteの初期サイズを保存する変数
     private Vector3 defaultLocalScale;
     private int direction = 1;
+    // 補正値
+    public float correctionValue = 1.0f;
     [SerializeField]
     private StageType stageType;
 
