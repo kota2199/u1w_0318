@@ -9147,7 +9147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0324e246f33a94ba48cbbfce557b8f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageType: 1
+  playerController: {fileID: 1269684488}
+  stageType: 0
+  isPlay: 0
 --- !u!4 &570038672
 Transform:
   m_ObjectHideFlags: 0
@@ -10078,7 +10080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5828672891693252632, guid: cbdc360dc56debb4faed55ab223d5397, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5828672891693252634, guid: cbdc360dc56debb4faed55ab223d5397, type: 3}
       propertyPath: m_Size.y
@@ -11005,8 +11007,12 @@ PrefabInstance:
       value: Action
       objectReference: {fileID: 0}
     - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
+      propertyPath: checkPointCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
       propertyPath: operationMethod
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
       propertyPath: cameraController
@@ -11682,7 +11688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462999850449137452, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2462999850449137453, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
       propertyPath: bulletType
@@ -12818,6 +12824,7 @@ MonoBehaviour:
   playerInput: {fileID: 0}
   jumpPower: 30
   operationMethod: 0
+  checkPointCount: 0
 --- !u!61 &8058148558343707738
 BoxCollider2D:
   m_ObjectHideFlags: 0

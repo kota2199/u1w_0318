@@ -7,7 +7,7 @@ public class PlayerStatusController : MonoBehaviour
     [SerializeField]
     PlayerStatus playerStatus;
     [SerializeField]
-    int interval = 10;
+    private int interval = 10;
 
     // PlayerStatusのデフォルト値
     private float defaultGravitationalAcceleration = -9.81f;
