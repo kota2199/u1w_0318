@@ -89,11 +89,13 @@ public class BulletLaunchEnemyAnimation : MonoBehaviour
     {
         if (this.transform.position.x + correctionValue < playerTransform.position.x)
         {
-            transform.localScale = new Vector3(defaultLocalScale.x * -direction, defaultLocalScale.y, defaultLocalScale.z);
+            transform.localScale =
+                new Vector3(defaultLocalScale.x * -direction, defaultLocalScale.y, defaultLocalScale.z);
         }
         if(playerTransform.position.x < this.transform.position.x - correctionValue)
         {
-            transform.localScale = new Vector3(defaultLocalScale.x * direction, defaultLocalScale.y, defaultLocalScale.z);
+            transform.localScale =
+                new Vector3(defaultLocalScale.x * direction, defaultLocalScale.y, defaultLocalScale.z);
         }
     }
 }
