@@ -10313,6 +10313,8 @@ MonoBehaviour:
   minScale: 1
   rightKeyImage: {fileID: 2144613023}
   leftKeyImage: {fileID: 2111795706}
+  jumpKeyImage: {fileID: 637396252}
+  attackKeyImage: {fileID: 1970584275}
   j: {fileID: 21300000, guid: 5f5cc39d8d85ec044b2b1407d2241678, type: 3}
   l: {fileID: 21300000, guid: 63c7c02e5253f90479aeda3ba32bd108, type: 3}
   g: {fileID: 21300000, guid: 3781bf72b0fedd54b97690b0168e9be0, type: 3}
@@ -10323,6 +10325,10 @@ MonoBehaviour:
   q: {fileID: 21300000, guid: d4ddccf3369506c4497383dbed526787, type: 3}
   w: {fileID: 21300000, guid: 9c46e90d04393284f833f1717dfe8888, type: 3}
   p: {fileID: 21300000, guid: 5adf62aad3632584ab0d10df4c5bd9c7, type: 3}
+  WP: {fileID: 21300000, guid: 6a8f36856c1525e4a88bb170718be673, type: 3}
+  XM: {fileID: 21300000, guid: 2a401b0ae6f78e8468bec4e94ebf0935, type: 3}
+  space: {fileID: 21300000, guid: 16b8eb30a3ba5ad479fcbf55aaa3e149, type: 3}
+  enter: {fileID: 21300000, guid: 6679d1b62ef6a474caf35305a80fb055, type: 3}
 --- !u!114 &1159285201
 MonoBehaviour:
   m_ObjectHideFlags: 0
