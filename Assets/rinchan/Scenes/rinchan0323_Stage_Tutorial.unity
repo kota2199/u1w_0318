@@ -10078,7 +10078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5828672891693252632, guid: cbdc360dc56debb4faed55ab223d5397, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5828672891693252634, guid: cbdc360dc56debb4faed55ab223d5397, type: 3}
       propertyPath: m_Size.y
@@ -11005,8 +11005,12 @@ PrefabInstance:
       value: Action
       objectReference: {fileID: 0}
     - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
-      propertyPath: operationMethod
+      propertyPath: checkPointCount
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
+      propertyPath: operationMethod
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
       propertyPath: cameraController
@@ -12818,6 +12822,7 @@ MonoBehaviour:
   playerInput: {fileID: 0}
   jumpPower: 30
   operationMethod: 0
+  checkPointCount: 0
 --- !u!61 &8058148558343707738
 BoxCollider2D:
   m_ObjectHideFlags: 0

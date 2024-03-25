@@ -41,12 +41,14 @@ public class PlayerController : MonoBehaviour
     //  現在の操作方法の名前
     private string operationMethodName;
     // チェックポイントカウント
-    private int checkPointCount = 0;
+    public int checkPointCount = 0;
     // PlayerSpriteの初期サイズを保存する変数
     private Vector3 defaultLocalScale;
     private float horizontalInput;
     private InputAction wpxmAction;
+    // WPSMが押されているかを判定
     private bool isPressed;
+    private float inputValue;
 
     // Start is called before the first frame update
     private void Start()
@@ -55,6 +57,8 @@ public class PlayerController : MonoBehaviour
         cameraController.SetPosition(transform.position);
         // 初期状態でPlayerの大きさを保存
         defaultLocalScale = transform.localScale;
+        // 操作方法をcheckPointの値によって初期化
+        operationMethod = (Operation_Method)checkPointCount;
 
         wpxmAction = playerInput.actions["WPXM"];
     }
@@ -69,14 +73,23 @@ public class PlayerController : MonoBehaviour
         // もしPlayerのy軸方向への加速度が0なら地面に接地していると判定する *たまにジャンプできないときがあったため範囲を指定
         if (playerRigidbody2D.velocity.y > -0.2 && playerRigidbody2D.velocity.y < 0.2)
         {
-            // 地面に接地していると判定
-            isGround = true;
+            if (horizontalInput != 0 && playerRigidbody2D.velocity.x == 0)
+            {
+                // 壁に張り付いたときの復帰を阻止！
+                isGround = false;
+            }
+            else
+            {
+                // 地面に接地していると判定
+                isGround = true;
+            }
         }
         else
         {
             // 地面に接地していないと判定
             isGround = false;
         }
+        //Debug.Log(playerRigidbody2D.velocity.x);
 
         // アニメーションの再生
         playerAnimator.SetFloat("Vertical", playerRigidbody2D.velocity.y);
@@ -116,6 +129,8 @@ public class PlayerController : MonoBehaviour
             case Operation_Method.WPXM:
                 wpxmAction.Enable();
                 isPressed = wpxmAction.IsPressed();
+                horizontalInput = inputValue;
+                OperatePlayer();
                 break;
             default:
                 // 移動の横方向をInputから値で取得
@@ -148,7 +163,7 @@ public class PlayerController : MonoBehaviour
         // アニメーションの再生
         playerAnimator.SetFloat("Horizontal", horizontalInput);
 
-        if(horizontalInput != 0)
+        if (horizontalInput != 0)
         {
             // キャラがどっちに向いているかを判定する
             float direction = Mathf.Sign(horizontalInput);
@@ -192,7 +207,6 @@ public class PlayerController : MonoBehaviour
     public void OnWPXM(InputValue value)
     {
         Debug.Log(isPressed);
-        horizontalInput = value.Get<float>();
-        OperatePlayer();
+        inputValue = value.Get<float>();
     }
 }
