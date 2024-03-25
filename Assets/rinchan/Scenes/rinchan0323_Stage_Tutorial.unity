@@ -9206,7 +9206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 1269684488}
   stageType: 0
-  isPlay: 0
+  isPlay: 1
 --- !u!4 &570038672
 Transform:
   m_ObjectHideFlags: 0
@@ -11015,6 +11015,10 @@ PrefabInstance:
     - target: {fileID: 7695392150775768659, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
+      propertyPath: enterKey
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
       propertyPath: cameraController
@@ -12828,6 +12832,8 @@ MonoBehaviour:
   jumpPower: 30
   operationMethod: 0
   checkPointCount: 0
+  spaceKey: 0
+  enterKey: 0
 --- !u!61 &8058148558343707738
 BoxCollider2D:
   m_ObjectHideFlags: 0
