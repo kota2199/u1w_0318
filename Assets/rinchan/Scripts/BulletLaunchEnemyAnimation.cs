@@ -3,17 +3,8 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 
-public enum StageType
-{
-    Land,   // 陸のステージ
-    Water   // 水のステージ
-}
-
 public class BulletLaunchEnemyAnimation : MonoBehaviour
 {
-    [SerializeField]
-    AnimationClip blueBird, greenBird, redBird, yellowBird;
-    
     [SerializeField]
     private BulletLaunchEnemy bulletLaunchEnemy;
 
@@ -22,6 +13,8 @@ public class BulletLaunchEnemyAnimation : MonoBehaviour
     private AnimatorController animatorController;
     [SerializeField]
     private Transform playerTransform;
+    [SerializeField]
+    GameManager gameManager;
 
     // 以下変数
     AnimationClip[] clips;
@@ -31,9 +24,7 @@ public class BulletLaunchEnemyAnimation : MonoBehaviour
     private Vector3 defaultLocalScale;
     private int direction = 1;
     // 補正値
-    public float correctionValue = 1.0f;
-    [SerializeField]
-    private StageType stageType;
+    private float correctionValue = 1.0f;
 
     // Start is called before the first frame update
     private void Start()
@@ -47,7 +38,7 @@ public class BulletLaunchEnemyAnimation : MonoBehaviour
         // 初期状態でBulletLaunchEnemyの大きさを保存
         defaultLocalScale = transform.localScale;
 
-        switch (stageType)
+        switch (gameManager.stageType)
         {
             case StageType.Land:
                 clips = birdClips;
@@ -93,13 +84,14 @@ public class BulletLaunchEnemyAnimation : MonoBehaviour
         }
     }
 
+    // BulletLaunchEnemyをPlayerの方向に向かせる
     private void AdjustDirection(int direction)
     {
-        if (this.transform.position.x < playerTransform.position.x)
+        if (this.transform.position.x + correctionValue < playerTransform.position.x)
         {
             transform.localScale = new Vector3(defaultLocalScale.x * -direction, defaultLocalScale.y, defaultLocalScale.z);
         }
-        else
+        if(playerTransform.position.x < this.transform.position.x - correctionValue)
         {
             transform.localScale = new Vector3(defaultLocalScale.x * direction, defaultLocalScale.y, defaultLocalScale.z);
         }
