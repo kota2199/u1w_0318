@@ -9147,7 +9147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0324e246f33a94ba48cbbfce557b8f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 1269684488}
   stageType: 1
+  isPlay: 0
 --- !u!4 &570038672
 Transform:
   m_ObjectHideFlags: 0
