@@ -20,4 +20,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Geek/Scenes/Stage_03.unity
     guid: fa831bb0d3e618c478d863c9cc3fdf10
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: aa60f055431f24d45ae22ec94ea337d8, type: 2}
