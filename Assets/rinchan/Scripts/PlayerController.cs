@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// 操作方法を示すEnum「Operation_Method」
 public enum Operation_Method
@@ -26,6 +27,8 @@ public class PlayerController : MonoBehaviour
     CameraController cameraController;
     [SerializeField]
     InputGuidController inputGuidController;
+    [SerializeField]
+    PlayerInput playerInput;
 
     // 以下変数
     // ジャンプする力の大きさを指定
@@ -41,6 +44,9 @@ public class PlayerController : MonoBehaviour
     private int checkPointCount = 0;
     // PlayerSpriteの初期サイズを保存する変数
     private Vector3 defaultLocalScale;
+    private float horizontalInput;
+    private InputAction wpxmAction;
+    private bool isPressed;
 
     // Start is called before the first frame update
     private void Start()
@@ -49,20 +55,19 @@ public class PlayerController : MonoBehaviour
         cameraController.SetPosition(transform.position);
         // 初期状態でPlayerの大きさを保存
         defaultLocalScale = transform.localScale;
+
+        wpxmAction = playerInput.actions["WPXM"];
     }
 
     // Update is called once per frame
     private void Update()
     {
-        // Playerの慣性を指定
-        //material.friction = playerStatus.friction;
-
         // カメラにPlayerの座標を渡す
         cameraController.SetPosition(this.transform.position);
 
         // PlayerがGroundに接地しているかを判定
         // もしPlayerのy軸方向への加速度が0なら地面に接地していると判定する *たまにジャンプできないときがあったため範囲を指定
-        if (playerRigidbody2D.velocity.y > -0.1 && playerRigidbody2D.velocity.y < 0.1)
+        if (playerRigidbody2D.velocity.y > -0.2 && playerRigidbody2D.velocity.y < 0.2)
         {
             // 地面に接地していると判定
             isGround = true;
@@ -104,8 +109,20 @@ public class PlayerController : MonoBehaviour
     {
         // プレイヤーの操作
         //列挙子を文字列に変換
-        operationMethodName = operationMethod.ToString();
-        OperatePlayer(operationMethodName);
+        operationMethodName = operationMethod.ToString();    
+
+        switch (operationMethod)
+        {
+            case Operation_Method.WPXM:
+                wpxmAction.Enable();
+                isPressed = wpxmAction.IsPressed();
+                break;
+            default:
+                // 移動の横方向をInputから値で取得
+                horizontalInput = Input.GetAxis(operationMethodName);
+                OperatePlayer();
+                break;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -113,20 +130,21 @@ public class PlayerController : MonoBehaviour
         // チェックポイントだったら
         if (collision.gameObject.CompareTag("CheckPoint"))
         {
-            checkPointCount++;
-            // 「Operation_Method」のcheckPointCount番目の操作方法に変更
-            operationMethod = (Operation_Method)checkPointCount;
-            StartCoroutine(inputGuidController.Anim(operationMethod.ToString()));
-            Debug.Log("現在の操作方法：" + operationMethod);
+            while (checkPointCount < 6)
+            {
+                checkPointCount++;
+                // Operation_MethodのcheckPointCount番目の操作方法に変更
+                operationMethod = (Operation_Method)checkPointCount;
+                Debug.Log("現在の操作方法：" + operationMethod);
+
+                StartCoroutine(inputGuidController.Anim(operationMethod.ToString()));
+            }
         }
     }
 
     // Playerの移動
-    private void OperatePlayer(string operation)
+    private void OperatePlayer()
     {
-        // 移動の横方向をInputから値で取得
-        float horizontalInput = Input.GetAxis(operation);
-
         // アニメーションの再生
         playerAnimator.SetFloat("Horizontal", horizontalInput);
 
@@ -152,5 +170,29 @@ public class PlayerController : MonoBehaviour
                 playerRigidbody2D.AddForce(new Vector2(horizontalInput * playerStatus.maxSpeed, 0), ForceMode2D.Force);
             }
         }
+    }
+
+
+    /*public void OnWPXM(InputAction.CallbackContext context)
+    {
+        //horizontalInput = inputValue.Get<float>();
+        //Debug.Log(horizontalInput);
+        Debug.Log(context.ReadValue<float>());
+        if (isWPSM == true)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                var inputValue = context.ReadValue<float>();
+                horizontalInput = inputValue;
+                OperatePlayer();
+            }
+        }
+    }*/
+
+    public void OnWPXM(InputValue value)
+    {
+        Debug.Log(isPressed);
+        horizontalInput = value.Get<float>();
+        OperatePlayer();
     }
 }
