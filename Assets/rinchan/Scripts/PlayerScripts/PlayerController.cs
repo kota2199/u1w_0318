@@ -37,11 +37,11 @@ public class PlayerController : MonoBehaviour
     private bool isGround;
     // EnumのOperation_Methodを定義
     [SerializeField]
-    private Operation_Method operationMethod = Operation_Method.Horizontal;
-    //  現在の操作方法の名前
-    private string operationMethodName;
+    private Operation_Method operationMethod;
     // チェックポイントカウント
     public int checkPointCount = 0;
+    //  現在の操作方法の名前
+    private string operationMethodName;
     // PlayerSpriteの初期サイズを保存する変数
     private Vector3 defaultLocalScale;
     private float horizontalInput;
@@ -114,8 +114,6 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Attack!");
         }
-
-        //Debug.Log(GetComponent<Rigidbody2D>().velocity);
     }
 
     private void FixedUpdate()
@@ -187,26 +185,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-    /*public void OnWPXM(InputAction.CallbackContext context)
-    {
-        //horizontalInput = inputValue.Get<float>();
-        //Debug.Log(horizontalInput);
-        Debug.Log(context.ReadValue<float>());
-        if (isWPSM == true)
-        {
-            if (context.phase == InputActionPhase.Performed)
-            {
-                var inputValue = context.ReadValue<float>();
-                horizontalInput = inputValue;
-                OperatePlayer();
-            }
-        }
-    }*/
-
     public void OnWPXM(InputValue value)
     {
-        Debug.Log(isPressed);
         inputValue = value.Get<float>();
     }
 }
