@@ -137,5 +137,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  lifeTime: 1
+  lifeTime: 10
   launchVector: {x: 0, y: 0}

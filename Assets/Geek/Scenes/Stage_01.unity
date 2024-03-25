@@ -703,6 +703,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2462999850449137453, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
+      propertyPath: interval
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462999850449137453, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
+      propertyPath: bulletType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462999850449137453, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
+      propertyPath: bulletSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2462999850449137453, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
+      propertyPath: radiusOfAttack
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
 --- !u!1 &609892039
@@ -18800,6 +18816,26 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1013260749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2462999850449137452, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
+  m_PrefabInstance: {fileID: 512738582}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1013260755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013260749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac69f6fe8493c3439fcb55d42168626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amoutOfMove: 1
+  interval: 1
+  vectorOFMove: 0
 --- !u!1 &1135864901
 GameObject:
   m_ObjectHideFlags: 0
