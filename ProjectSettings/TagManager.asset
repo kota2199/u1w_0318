@@ -10,6 +10,7 @@ TagManager:
   - Gravity
   - Ineritia
   - SpeedDown
+  - Ice
   layers:
   - Default
   - TransparentFX
