@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// 操作方法を示すEnum「Operation_Method」
 public enum Operation_Method
@@ -12,6 +13,16 @@ public enum Operation_Method
     RV,            // = 4
     MQ,            // = 5
     WPXM,          // = 6
+}
+
+public enum SpaceKey
+{
+    Attack, Jump
+}
+
+public enum EnterKey
+{
+    Attack, Jump
 }
 
 public class PlayerController : MonoBehaviour
@@ -26,6 +37,8 @@ public class PlayerController : MonoBehaviour
     CameraController cameraController;
     [SerializeField]
     InputGuidController inputGuidController;
+    [SerializeField]
+    PlayerInput playerInput;
 
     // 以下変数
     // ジャンプする力の大きさを指定
@@ -34,13 +47,21 @@ public class PlayerController : MonoBehaviour
     private bool isGround;
     // EnumのOperation_Methodを定義
     [SerializeField]
-    private Operation_Method operationMethod = Operation_Method.Horizontal;
+    private Operation_Method operationMethod;
+    // チェックポイントカウント
+    public int checkPointCount = 0;
     //  現在の操作方法の名前
     private string operationMethodName;
-    // チェックポイントカウント
-    private int checkPointCount = 0;
     // PlayerSpriteの初期サイズを保存する変数
     private Vector3 defaultLocalScale;
+    private float horizontalInput;
+    private InputAction wpxmAction;
+    // WPSMが押されているかを判定
+    private bool isPressed;
+    private float inputValue;
+
+    public SpaceKey spaceKey;
+    public EnterKey enterKey;
 
     // Start is called before the first frame update
     private void Start()
@@ -49,63 +70,97 @@ public class PlayerController : MonoBehaviour
         cameraController.SetPosition(transform.position);
         // 初期状態でPlayerの大きさを保存
         defaultLocalScale = transform.localScale;
+        // 操作方法をcheckPointの値によって初期化
+        operationMethod = (Operation_Method)checkPointCount;
+
+        wpxmAction = playerInput.actions["WPXM"];
     }
 
     // Update is called once per frame
     private void Update()
     {
-        // Playerの慣性を指定
-        //material.friction = playerStatus.friction;
-
         // カメラにPlayerの座標を渡す
         cameraController.SetPosition(this.transform.position);
 
         // PlayerがGroundに接地しているかを判定
         // もしPlayerのy軸方向への加速度が0なら地面に接地していると判定する *たまにジャンプできないときがあったため範囲を指定
-        if (playerRigidbody2D.velocity.y > -0.1 && playerRigidbody2D.velocity.y < 0.1)
+        if (playerRigidbody2D.velocity.y > -0.2 && playerRigidbody2D.velocity.y < 0.2)
         {
-            // 地面に接地していると判定
-            isGround = true;
+            if (horizontalInput != 0 && playerRigidbody2D.velocity.x == 0)
+            {
+                // 壁に張り付いたときの復帰を阻止！
+                isGround = false;
+            }
+            else
+            {
+                // 地面に接地していると判定
+                isGround = true;
+            }
         }
         else
         {
             // 地面に接地していないと判定
             isGround = false;
         }
+        //Debug.Log(playerRigidbody2D.velocity.x);
 
         // アニメーションの再生
         playerAnimator.SetFloat("Vertical", playerRigidbody2D.velocity.y);
         playerAnimator.SetBool("isGround", isGround);
 
-        // ジャンプの実行
-        if (Input.GetButtonDown("Jump"))
+
+        // EnterKeyが押されたとき
+        if (Input.GetButtonDown("Enter"))
         {
-            //地面にいる場合のみ処理する
-            if (isGround == true)
+            switch (enterKey)
             {
-                // ジャンプの処理
-                playerRigidbody2D.AddForce(Vector2.up * jumpPower * 30);
-                // ジャンプアニメーションの再生
-                playerAnimator.SetTrigger("Jump");
+                case EnterKey.Attack:
+                    Attack();
+                    break;
+                case EnterKey.Jump:
+                    Jump();
+                    break;
+                default:
+                    break;
+            }
+        }       
+        // SpaceKeyが押されたとき
+        if (Input.GetButtonDown("Space"))
+        {
+            switch (spaceKey)
+            {
+                case SpaceKey.Attack:
+                    Attack();
+                    break;
+                case SpaceKey.Jump:
+                    Jump();
+                    break;
+                default:
+                    break;
             }
         }
-        
-
-        // 攻撃の実行
-        if (Input.GetButtonDown("Attack"))
-        {
-            Debug.Log("Attack!");
-        }
-
-        //Debug.Log(GetComponent<Rigidbody2D>().velocity);
     }
 
     private void FixedUpdate()
     {
         // プレイヤーの操作
         //列挙子を文字列に変換
-        operationMethodName = operationMethod.ToString();
-        OperatePlayer(operationMethodName);
+        operationMethodName = operationMethod.ToString();    
+
+        switch (operationMethod)
+        {
+            case Operation_Method.WPXM:
+                wpxmAction.Enable();
+                isPressed = wpxmAction.IsPressed();
+                horizontalInput = inputValue;
+                OperatePlayer();
+                break;
+            default:
+                // 移動の横方向をInputから値で取得
+                horizontalInput = Input.GetAxis(operationMethodName);
+                OperatePlayer();
+                break;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -114,23 +169,21 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("CheckPoint"))
         {
             checkPointCount++;
-            // 「Operation_Method」のcheckPointCount番目の操作方法に変更
+            // Operation_MethodのcheckPointCount番目の操作方法に変更
             operationMethod = (Operation_Method)checkPointCount;
-            StartCoroutine(inputGuidController.Anim(operationMethod.ToString()));
             Debug.Log("現在の操作方法：" + operationMethod);
+
+            StartCoroutine(inputGuidController.Anim(operationMethod.ToString()));
         }
     }
 
     // Playerの移動
-    private void OperatePlayer(string operation)
+    private void OperatePlayer()
     {
-        // 移動の横方向をInputから値で取得
-        float horizontalInput = Input.GetAxis(operation);
-
         // アニメーションの再生
         playerAnimator.SetFloat("Horizontal", horizontalInput);
 
-        if(horizontalInput != 0)
+        if (horizontalInput != 0)
         {
             // キャラがどっちに向いているかを判定する
             float direction = Mathf.Sign(horizontalInput);
@@ -152,5 +205,29 @@ public class PlayerController : MonoBehaviour
                 playerRigidbody2D.AddForce(new Vector2(horizontalInput * playerStatus.maxSpeed, 0), ForceMode2D.Force);
             }
         }
+    }
+
+    public void OnWPXM(InputValue value)
+    {
+        inputValue = value.Get<float>();
+    }
+
+
+    // ジャンプの実行
+    private void Jump()
+    {
+        //地面にいる場合のみ処理する
+        if (isGround == true)
+        {
+            // ジャンプの処理
+            playerRigidbody2D.AddForce(Vector2.up * jumpPower * 30);
+            // ジャンプアニメーションの再生
+            playerAnimator.SetTrigger("Jump");
+        }
+    }
+    // 攻撃の実行
+    private void Attack()
+    {
+        Debug.Log("Attack!");
     }
 }

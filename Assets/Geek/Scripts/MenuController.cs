@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
@@ -36,6 +37,19 @@ public class MenuController : MonoBehaviour
     void Start()
     {
         maxMenuNumber = menus.Length;
+
+        int progress = PlayerPrefs.GetInt("Progress");
+        for (int i = 0; i < menus.Length; i++)
+        {
+            if(progress >= i)
+            {
+                menus[i].GetComponent<Image>().color = new Color(1, 1, 1, 1f);
+            }
+            else
+            {
+                menus[i].GetComponent<Image>().color = new Color(1, 1, 1, 0.6f);
+            }
+        }
     }
 
     // Update is called once per frame
