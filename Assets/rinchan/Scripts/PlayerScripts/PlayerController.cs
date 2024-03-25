@@ -143,15 +143,12 @@ public class PlayerController : MonoBehaviour
         // チェックポイントだったら
         if (collision.gameObject.CompareTag("CheckPoint"))
         {
-            while (checkPointCount < 6)
-            {
-                checkPointCount++;
-                // Operation_MethodのcheckPointCount番目の操作方法に変更
-                operationMethod = (Operation_Method)checkPointCount;
-                Debug.Log("現在の操作方法：" + operationMethod);
+            checkPointCount++;
+            // Operation_MethodのcheckPointCount番目の操作方法に変更
+            operationMethod = (Operation_Method)checkPointCount;
+            Debug.Log("現在の操作方法：" + operationMethod);
 
-                StartCoroutine(inputGuidController.Anim(operationMethod.ToString()));
-            }
+            StartCoroutine(inputGuidController.Anim(operationMethod.ToString()));
         }
     }
 
