@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     CameraController cameraController;
     [SerializeField]
     InputGuidController inputGuidController;
+    [SerializeField]
+    PlayerInput playerInput;
 
     // 以下変数
     // ジャンプする力の大きさを指定
@@ -43,7 +45,8 @@ public class PlayerController : MonoBehaviour
     // PlayerSpriteの初期サイズを保存する変数
     private Vector3 defaultLocalScale;
     private float horizontalInput;
-    private bool isWPSM = false;
+    private InputAction wpxmAction;
+    private bool isPressed;
 
     // Start is called before the first frame update
     private void Start()
@@ -52,6 +55,8 @@ public class PlayerController : MonoBehaviour
         cameraController.SetPosition(transform.position);
         // 初期状態でPlayerの大きさを保存
         defaultLocalScale = transform.localScale;
+
+        wpxmAction = playerInput.actions["WPXM"];
     }
 
     // Update is called once per frame
@@ -109,15 +114,8 @@ public class PlayerController : MonoBehaviour
         switch (operationMethod)
         {
             case Operation_Method.WPXM:
-                if(Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.P))
-                {
-                    horizontalInput = Input.GetAxis("WX");
-                }
-                if(Input.GetKey(KeyCode.X) && Input.GetKey(KeyCode.M))
-                {
-                    horizontalInput = Input.GetAxis("PM");
-                }
-                OperatePlayer();
+                wpxmAction.Enable();
+                isPressed = wpxmAction.IsPressed();
                 break;
             default:
                 // 移動の横方向をInputから値で取得
@@ -175,7 +173,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void OnWPXM(InputAction.CallbackContext context)
+    /*public void OnWPXM(InputAction.CallbackContext context)
     {
         //horizontalInput = inputValue.Get<float>();
         //Debug.Log(horizontalInput);
@@ -185,9 +183,16 @@ public class PlayerController : MonoBehaviour
             if (context.phase == InputActionPhase.Performed)
             {
                 var inputValue = context.ReadValue<float>();
-                horizontalInput = -inputValue;
+                horizontalInput = inputValue;
                 OperatePlayer();
             }
         }
+    }*/
+
+    public void OnWPXM(InputValue value)
+    {
+        Debug.Log(isPressed);
+        horizontalInput = value.Get<float>();
+        OperatePlayer();
     }
 }

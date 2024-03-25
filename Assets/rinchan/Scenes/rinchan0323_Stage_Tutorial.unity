@@ -754,7 +754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &397621544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10020,6 +10020,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802984167}
   m_CullTransparentMesh: 1
+--- !u!1 &859283557 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7695392150775768657, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
+  m_PrefabInstance: {fileID: 1410918867}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &907689940
 GameObject:
   m_ObjectHideFlags: 0
@@ -10597,7 +10602,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
   m_PrefabInstance: {fileID: 1410918867}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 859283557}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c46c092c6d81b4598a76d57d9fe4d7f8, type: 3}
@@ -10608,6 +10613,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7695392150775768659, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
   m_PrefabInstance: {fileID: 1410918867}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1269684498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859283557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 643e7f36cbf2b4a4c943356ea82c35c2, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1326310204
 GameObject:
   m_ObjectHideFlags: 0
@@ -10962,12 +10997,16 @@ PrefabInstance:
       value: 354d81b8-a699-4dfa-bf5c-6a4bd1e9760c
       objectReference: {fileID: 0}
     - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 1269684498}
+    - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
       propertyPath: action.m_Name
       value: Action
       objectReference: {fileID: 0}
     - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
       propertyPath: operationMethod
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
       propertyPath: cameraController
@@ -11643,7 +11682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2462999850449137452, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2462999850449137453, guid: f62fa3f344781864982fc0b431a6ce4f, type: 3}
       propertyPath: bulletType
@@ -12776,6 +12815,7 @@ MonoBehaviour:
   playerStatus: {fileID: 11400000, guid: c9621b51ebed244e38241abf1677812a, type: 2}
   cameraController: {fileID: 273436436}
   inputGuidController: {fileID: 0}
+  playerInput: {fileID: 0}
   jumpPower: 30
   operationMethod: 0
 --- !u!61 &8058148558343707738
