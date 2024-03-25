@@ -15,6 +15,16 @@ public enum Operation_Method
     WPXM,          // = 6
 }
 
+public enum SpaceKey
+{
+    Attack, Jump
+}
+
+public enum EnterKey
+{
+    Attack, Jump
+}
+
 public class PlayerController : MonoBehaviour
 {
     // PlayerのRigidbody
@@ -49,6 +59,11 @@ public class PlayerController : MonoBehaviour
     // WPSMが押されているかを判定
     private bool isPressed;
     private float inputValue;
+
+    [SerializeField]
+    SpaceKey spaceKey;
+    [SerializeField]
+    EnterKey enterKey;
 
     // Start is called before the first frame update
     private void Start()
@@ -95,24 +110,36 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetFloat("Vertical", playerRigidbody2D.velocity.y);
         playerAnimator.SetBool("isGround", isGround);
 
-        // ジャンプの実行
-        if (Input.GetButtonDown("Jump"))
-        {
-            //地面にいる場合のみ処理する
-            if (isGround == true)
-            {
-                // ジャンプの処理
-                playerRigidbody2D.AddForce(Vector2.up * jumpPower * 30);
-                // ジャンプアニメーションの再生
-                playerAnimator.SetTrigger("Jump");
-            }
-        }
-        
 
-        // 攻撃の実行
-        if (Input.GetButtonDown("Attack"))
+        // EnterKeyが押されたとき
+        if (Input.GetButtonDown("Enter"))
         {
-            Debug.Log("Attack!");
+            switch (enterKey)
+            {
+                case EnterKey.Attack:
+                    Attack();
+                    break;
+                case EnterKey.Jump:
+                    Jump();
+                    break;
+                default:
+                    break;
+            }
+        }       
+        // SpaceKeyが押されたとき
+        if (Input.GetButtonDown("Space"))
+        {
+            switch (spaceKey)
+            {
+                case SpaceKey.Attack:
+                    Attack();
+                    break;
+                case SpaceKey.Jump:
+                    Jump();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -143,15 +170,12 @@ public class PlayerController : MonoBehaviour
         // チェックポイントだったら
         if (collision.gameObject.CompareTag("CheckPoint"))
         {
-            while (checkPointCount < 6)
-            {
-                checkPointCount++;
-                // Operation_MethodのcheckPointCount番目の操作方法に変更
-                operationMethod = (Operation_Method)checkPointCount;
-                Debug.Log("現在の操作方法：" + operationMethod);
+            checkPointCount++;
+            // Operation_MethodのcheckPointCount番目の操作方法に変更
+            operationMethod = (Operation_Method)checkPointCount;
+            Debug.Log("現在の操作方法：" + operationMethod);
 
-                StartCoroutine(inputGuidController.Anim(operationMethod.ToString()));
-            }
+            StartCoroutine(inputGuidController.Anim(operationMethod.ToString()));
         }
     }
 
@@ -188,5 +212,24 @@ public class PlayerController : MonoBehaviour
     public void OnWPXM(InputValue value)
     {
         inputValue = value.Get<float>();
+    }
+
+
+    // ジャンプの実行
+    private void Jump()
+    {
+        //地面にいる場合のみ処理する
+        if (isGround == true)
+        {
+            // ジャンプの処理
+            playerRigidbody2D.AddForce(Vector2.up * jumpPower * 30);
+            // ジャンプアニメーションの再生
+            playerAnimator.SetTrigger("Jump");
+        }
+    }
+    // 攻撃の実行
+    private void Attack()
+    {
+        Debug.Log("Attack!");
     }
 }
