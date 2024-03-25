@@ -28233,7 +28233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0324e246f33a94ba48cbbfce557b8f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 1852121562}
   stageType: 0
+  isPlay: 0
 --- !u!1 &481242273
 GameObject:
   m_ObjectHideFlags: 0
@@ -31483,6 +31485,17 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1852121562 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6623365938945197892, guid: 09d022af993ff5e4eabc72999cad6b18, type: 3}
+  m_PrefabInstance: {fileID: 1852121558}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852121560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c46c092c6d81b4598a76d57d9fe4d7f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1852121569
 MonoBehaviour:
   m_ObjectHideFlags: 0

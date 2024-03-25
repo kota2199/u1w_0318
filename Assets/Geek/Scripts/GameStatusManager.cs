@@ -22,11 +22,14 @@ public class GameStatusManager : MonoBehaviour
 
     private bool outOfGame = false;
 
+    private GameManager manager;
+
 
     // Start is called before the first frame update
     private void Awake()
     {
         countDown = t_CountDown.GetComponent<Text>();
+        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Start()
@@ -61,9 +64,9 @@ public class GameStatusManager : MonoBehaviour
         }
 
         countDown.text = "Go!";
+        canControllPlayer(true);
         yield return new WaitForSeconds(1);
 
-        canControllPlayer(true);
 
         t_CountDown.SetActive(false);
     }
@@ -93,7 +96,7 @@ public class GameStatusManager : MonoBehaviour
 
     public void canControllPlayer(bool able)
     {
-        //player‚Ì‘€ì‚ğ‰Â”\‚É‚·‚é
+        manager.isPlay = able;
     }
 
     public IEnumerator ToNextScene(string sceneName)
