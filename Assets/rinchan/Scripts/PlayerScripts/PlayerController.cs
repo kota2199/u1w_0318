@@ -22,7 +22,7 @@ public enum SpaceKey
 
 public enum EnterKey
 {
-    Attack, Jump
+    Jump, Attack
 }
 
 public class PlayerController : MonoBehaviour
@@ -209,6 +209,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnWPXM(InputValue value)
     {
+        // 入力値を取得
         inputValue = value.Get<float>();
     }
 

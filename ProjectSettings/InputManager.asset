@@ -185,8 +185,8 @@ InputManager:
     m_Name: IM
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: i
-    positiveButton: m
+    negativeButton: m
+    positiveButton: i
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
