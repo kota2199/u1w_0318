@@ -60,10 +60,8 @@ public class PlayerController : MonoBehaviour
     private bool isPressed;
     private float inputValue;
 
-    [SerializeField]
-    SpaceKey spaceKey;
-    [SerializeField]
-    EnterKey enterKey;
+    public SpaceKey spaceKey;
+    public EnterKey enterKey;
 
     // Start is called before the first frame update
     private void Start()

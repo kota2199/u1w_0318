@@ -13,38 +13,52 @@ public class InputGuidController : MonoBehaviour
     private float minScale = 1f;
 
     [SerializeField]
-    private Image rightKeyImage, leftKeyImage;
+    private Image rightKeyImage, leftKeyImage, jumpKeyImage, attackKeyImage;
 
     [SerializeField]
-    private Sprite j, l, g, i, m, r, v, q, w, p;
+    private Sprite j, l, g, i, m, r, v, q, w, p, WP, XM, space, enter;
 
     private string r_Key, l_Key;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Anim();
-    }
+    private PlayerController playerController;
 
-    // Update is called once per frame
-    void Update()
+    // Start is called before the first frame update
+    void Awake()
     {
-        
+        playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
     public IEnumerator Anim(string keyMap)
     {
         char[] maps = keyMap.ToCharArray();
 
-        for(int i = 0; i < maps.Length; i++)
+        if(maps.Length < 3)
         {
-            if(i == 0)
+            for(int i = 0; i < maps.Length; i++)
             {
-                r_Key = maps[0].ToString();
+                if(i == 0)
+                {
+                    r_Key = maps[0].ToString();
+                }
+                if(i == 1)
+                {
+                    l_Key = maps[1].ToString();
+                }
             }
-            if(i == 1)
+        }
+        else
+        {
+            for (int i = 0; i < maps.Length; i++)
             {
-                l_Key = maps[1].ToString();
+                if (i == 0)
+                {
+                    r_Key = maps[0].ToString() + maps[1].ToString();
+                }
+                if (i == 1)
+                {
+                    l_Key = maps[2].ToString() + maps[3].ToString();
+                    Debug.Log("LKey" + l_Key);
+                }
             }
         }
 
@@ -58,7 +72,6 @@ public class InputGuidController : MonoBehaviour
 
     private void KeyConfig()
     {
-        Debug.Log(r_Key);
         switch (r_Key)
         {
             case "J":
@@ -90,6 +103,9 @@ public class InputGuidController : MonoBehaviour
                 break;
             case "P":
                 rightKeyImage.sprite = p;
+                break;
+            case "WP":
+                rightKeyImage.sprite = WP;
                 break;
             default:
                 break;
@@ -127,8 +143,22 @@ public class InputGuidController : MonoBehaviour
             case "P":
                 leftKeyImage.sprite = p;
                 break;
+            case "XM":
+                leftKeyImage.sprite = XM;
+                break;
             default:
                 break;
+        }
+
+        if(playerController.spaceKey == SpaceKey.Jump)
+        {
+            jumpKeyImage.sprite = space;
+            attackKeyImage.sprite = enter;
+        }
+        else
+        {
+            jumpKeyImage.sprite = enter;
+            attackKeyImage.sprite = space;
         }
     }
 }
