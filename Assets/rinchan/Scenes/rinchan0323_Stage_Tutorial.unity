@@ -11026,7 +11026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
       propertyPath: checkPointCount
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
       propertyPath: cameraController
