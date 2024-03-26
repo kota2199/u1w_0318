@@ -230,5 +230,6 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         Debug.Log("Attack!");
+        playerAnimator.SetTrigger("Attack");
     }
 }
