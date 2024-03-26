@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     InputGuidController inputGuidController;
     [SerializeField]
     PlayerInput playerInput;
+    GameManager gameManager;
 
     // 以下変数
     // ジャンプする力の大きさを指定
@@ -66,13 +67,27 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
+
+        switch (gameManager.stageType)
+        {
+            case StageType.Land:
+                playerAnimator.SetTrigger("Land");
+                break;
+            case StageType.Water:
+                playerAnimator.SetTrigger("Swim");
+                break;
+            default:
+                break;
+        }
+
         // カメラの初期位置
         cameraController.SetPosition(transform.position);
         // 初期状態でPlayerの大きさを保存
         defaultLocalScale = transform.localScale;
         // 操作方法をcheckPointの値によって初期化
         operationMethod = (Operation_Method)checkPointCount;
-
+        // PlayerInputからWPSMを取得
         wpxmAction = playerInput.actions["WPXM"];
     }
 
@@ -213,7 +228,6 @@ public class PlayerController : MonoBehaviour
         inputValue = value.Get<float>();
     }
 
-
     // ジャンプの実行
     private void Jump()
     {
@@ -230,6 +244,5 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         Debug.Log("Attack!");
-        playerAnimator.SetTrigger("Attack");
     }
 }
