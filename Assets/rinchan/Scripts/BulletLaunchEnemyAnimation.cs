@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
+using UnityEngine.Animations;
 using UnityEngine;
 
 public class BulletLaunchEnemyAnimation : MonoBehaviour
@@ -10,7 +10,7 @@ public class BulletLaunchEnemyAnimation : MonoBehaviour
 
     private Animator animator;
     [SerializeField]
-    private AnimatorController animatorController;
+    private RuntimeAnimatorController animatorController;
     [SerializeField]
     private Transform playerTransform;
     [SerializeField]
