@@ -9205,7 +9205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 1269684488}
-  stageType: 0
+  stageType: 1
   isPlay: 1
 --- !u!4 &570038672
 Transform:
@@ -10435,6 +10435,8 @@ MonoBehaviour:
   minScale: 1
   rightKeyImage: {fileID: 0}
   leftKeyImage: {fileID: 0}
+  jumpKeyImage: {fileID: 0}
+  attackKeyImage: {fileID: 0}
   j: {fileID: 0}
   l: {fileID: 0}
   g: {fileID: 0}
@@ -10445,6 +10447,10 @@ MonoBehaviour:
   q: {fileID: 0}
   w: {fileID: 0}
   p: {fileID: 0}
+  WP: {fileID: 0}
+  XM: {fileID: 0}
+  space: {fileID: 0}
+  enter: {fileID: 0}
 --- !u!1 &1164635312
 GameObject:
   m_ObjectHideFlags: 0
@@ -11025,8 +11031,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 570038671}
+    - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
       propertyPath: checkPointCount
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7695392150775768662, guid: eb9504d0821a74d04b4cc450c504f880, type: 3}
       propertyPath: cameraController
