@@ -105,6 +105,7 @@ public class PlayerController : MonoBehaviour
             {
                 // 壁に張り付いたときの復帰を阻止！
                 isGround = false;
+                GetComponent<Rigidbody2D>().sharedMaterial.friction = 0;
             }
             else
             {

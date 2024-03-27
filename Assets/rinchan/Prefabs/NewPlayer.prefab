@@ -133,6 +133,8 @@ MonoBehaviour:
   jumpPower: 12
   operationMethod: 0
   checkPointCount: 0
+  spaceKey: 0
+  enterKey: 0
 --- !u!114 &7695392150775768663
 MonoBehaviour:
   m_ObjectHideFlags: 0
