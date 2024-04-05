@@ -23,6 +23,8 @@ public class MenuPlayerController : MonoBehaviour
     {
         playerRigidbody2D = GetComponent<Rigidbody2D>();
         playerAnimator = GetComponent<Animator>();
+
+        playerAnimator.SetTrigger("Land");
     }
 
     // Update is called once per frame
