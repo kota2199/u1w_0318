@@ -143,6 +143,8 @@ public class PlayerController : MonoBehaviour
         // SpaceKeyが押されたとき
         if (Input.GetButtonDown("Space"))
         {
+            SoundManager.instance.PlaySE(1);
+
             switch (spaceKey)
             {
                 case SpaceKey.Attack:
@@ -190,6 +192,8 @@ public class PlayerController : MonoBehaviour
             Debug.Log("現在の操作方法：" + operationMethod);
 
             StartCoroutine(inputGuidController.Anim(operationMethod.ToString()));
+
+            SoundManager.instance.PlaySE(2);
         }
     }
 

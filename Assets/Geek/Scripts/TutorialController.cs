@@ -29,7 +29,6 @@ public class TutorialController : MonoBehaviour
 
     private IEnumerator autoDelete(GameObject obj)
     {
-        Debug.Log("false");
         yield return new WaitForSeconds(5);
         obj.SetActive(false);
     }

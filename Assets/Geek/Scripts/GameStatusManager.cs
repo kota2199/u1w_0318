@@ -77,20 +77,33 @@ public class GameStatusManager : MonoBehaviour
         {
             Goal();
             PlayerPrefs.SetInt("Progress", nextStageNumber);
+            if (!outOfGame)
+            {
+                Goal();
+                outOfGame = true;
+            }
         }
     }
 
     public void GameOver()
     {
-        gameOverCanvas.SetActive(true);
-        outOfGame = true;
-        canControllPlayer(false);
+        if (!outOfGame)
+        {
+            SoundManager.instance.audioSourceBGM.Stop();
+            SoundManager.instance.audioSourceSE.Stop();
+            SoundManager.instance.PlaySE(3);
+            gameOverCanvas.SetActive(true);
+            canControllPlayer(false);
+            outOfGame = true;
+        }
     }
 
     void Goal()
     {
+        SoundManager.instance.audioSourceBGM.Stop();
+        SoundManager.instance.audioSourceSE.Stop();
+        SoundManager.instance.PlaySE(4);
         goalCanvas.SetActive(true);
-        outOfGame = true;
         canControllPlayer(false);
     }
 
@@ -101,6 +114,7 @@ public class GameStatusManager : MonoBehaviour
 
     public IEnumerator ToNextScene(string sceneName)
     {
+        SoundManager.instance.PlaySE(0);
         fadeController.FadeOut();
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(sceneName);
