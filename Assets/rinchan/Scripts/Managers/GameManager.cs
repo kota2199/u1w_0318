@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum StageType
 {
@@ -21,7 +22,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //isPlay = true;
+        SoundManager.instance.audioSourceBGM.Stop();
+        SoundManager.instance.PlayBGM(SceneManager.GetActiveScene().name);
     }
 
     // Update is called once per frame

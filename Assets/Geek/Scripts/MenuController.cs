@@ -36,12 +36,14 @@ public class MenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SoundManager.instance.PlayBGM(SceneManager.GetActiveScene().name);
+
         maxMenuNumber = menus.Length;
 
         int progress = PlayerPrefs.GetInt("Progress");
         for (int i = 0; i < menus.Length; i++)
         {
-            if(progress >= i)
+            if(progress + 1 >= i)
             {
                 menus[i].GetComponent<Image>().color = new Color(1, 1, 1, 1f);
             }
@@ -100,6 +102,8 @@ public class MenuController : MonoBehaviour
 
     private IEnumerator PlayerJump()
     {
+        SoundManager.instance.PlaySE(1);
+
         if (!onMenu)
         {
             //Tutorial?????u??2?b??1???W?????v????????????
@@ -118,13 +122,7 @@ public class MenuController : MonoBehaviour
                 canSelectStage = false;
 
                 Vector3 playerPos = player.transform.position;
-                player.transform.DOJump(
-                playerPos,//?I?????????u
-                1.0f,   //?W?????v??????
-                1,      //?W?????v????
-                1.0f);  //???o????
-
-                fadeController.FadeOut();
+                player.transform.DOJump(playerPos, 1.0f, 1, 1.0f);
 
                 yield return new WaitForSeconds(1);
 
@@ -143,9 +141,12 @@ public class MenuController : MonoBehaviour
 
     private IEnumerator ToNextScene()
     {
-        if (target <= PlayerPrefs.GetInt("Progress"))
+        if (target <= PlayerPrefs.GetInt("Progress") + 1)
         {
-            yield return null;
+            fadeController.FadeOut();
+
+            yield return new WaitForSeconds(1.5f);
+
             SceneManager.LoadScene(sceneName[target]);
         }
         else
